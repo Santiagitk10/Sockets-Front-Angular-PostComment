@@ -1,0 +1,24 @@
+<h2>Main Section</h2>
+
+<label for="title">Title </label>
+<input name="title" id="title" type="text" [(ngModel)]="newTitle" placeholder="Title">
+<label for="author">Author </label>
+<input name="author" id="author" type="text" [(ngModel)]="newAuthor" placeholder="Author">
+<button (click)="submitPost()">Submit</button>
+
+<div *ngIf="posts">
+    <div *ngFor="let post of posts">
+        <app-post [post] = "post"></app-post > 
+    </div>
+</div>
+
+
+<h3>Find Post By Id</h3>
+<label for="post">Enter Post Id to Bring </label>
+<input name="post" id="post" type="text" [(ngModel)]="postToLookUp" placeholder="Post Id">
+<button (click)="startSearch()">Search</button>
+
+
+<div *ngIf="foundPost">
+        <app-post [post] = "foundPost"></app-post > 
+</div>
