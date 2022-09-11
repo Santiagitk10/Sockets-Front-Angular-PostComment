@@ -3,7 +3,9 @@ import { Post } from 'src/app/services/models';
 import { WebSocketSubject } from 'rxjs/webSocket';
 import { CommentView } from 'src/app/services/viewModels';
 import { SocketService } from 'src/app/services/socket.service';
-
+import { RequestsService } from 'src/app/services/requests.service';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -13,12 +15,18 @@ import { SocketService } from 'src/app/services/socket.service';
 })
 export class PostComponent implements OnInit {
 
-  @Input() post!:Post;
+  post!:Post;
   socketManager?:WebSocketSubject<CommentView>
 
-  constructor(private socket:SocketService) { }
+  constructor(
+    private requests:RequestsService,
+    private socket:SocketService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
+    this.startSearch();
     this.connectToPostSpace();
   }
 
@@ -37,6 +45,18 @@ export class PostComponent implements OnInit {
 
   closeSocketConnection(){
     this.socketManager?.complete();
+  }
+
+
+  startSearch(): void{
+    const postId:string | null = this.route.snapshot.paramMap.get('id')
+    this.requests.bringPostById(postId).subscribe(post => {
+      this.post= post;
+    })
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

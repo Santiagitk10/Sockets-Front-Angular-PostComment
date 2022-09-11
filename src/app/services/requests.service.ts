@@ -22,7 +22,7 @@ export class RequestsService {
     return this.httpClient.get<Post[]>("http://localhost:8081/bringallposts");
   }
 
-  bringPostById(postId: string):Observable<Post>{
+  bringPostById(postId: string | null):Observable<Post>{
     return this.httpClient.get<Post>( `http://localhost:8081/bringpost/${postId}`);
   }
 

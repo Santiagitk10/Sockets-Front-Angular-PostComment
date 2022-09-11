@@ -1,8 +1,10 @@
-<h3>Title: {{post.title}}</h3>
-<p> Author: {{post.author}}</p>
+
+<h2>{{ post.title }}</h2>
 
 <div *ngIf="post?.comments">
     <div *ngFor="let comment of post?.comments">
         <app-comment [comment]="comment"></app-comment>
     </div>
 </div>
+
+<button type="button" (click)="goBack()">go back</button>
