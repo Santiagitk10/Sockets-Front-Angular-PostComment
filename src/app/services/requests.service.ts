@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Post , CreatePostCommand } from './models';
+import { Post , CreatePostCommand, CreateCommentCommand } from './models';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,11 @@ export class RequestsService {
   }
 
   createPost(command:CreatePostCommand): Observable<Object>{
-    return this.httpClient.post("http://localhost:8080/create/post",command, this.httpOptions);
+    return this.httpClient.post("http://localhost:8080/create/post", command, this.httpOptions);
+  }
+
+  createComment(command:CreateCommentCommand): Observable<Object>{
+    return this.httpClient.post("http://localhost:8080/add/comment", command, this.httpOptions);
   }
 
 

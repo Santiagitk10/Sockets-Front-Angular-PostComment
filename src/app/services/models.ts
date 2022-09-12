@@ -17,3 +17,10 @@ export type CreatePostCommand = {
     title: string,
     author: string
 }
+
+export type CreateCommentCommand = {
+    postID: string,
+    commentID: string,
+    author: string,
+    content: string
+}

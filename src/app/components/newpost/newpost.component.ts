@@ -3,6 +3,7 @@ import { CreatePostCommand } from 'src/app/services/models';
 import { RequestsService } from 'src/app/services/requests.service';
 import { Post } from '../../services/models';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-newpost',
@@ -16,7 +17,11 @@ export class NewpostComponent implements OnInit {
   newAuthor:string = "";
   post?:Post;
 
-  constructor(private requests:RequestsService, private router:Router) { }
+  constructor(
+    private requests:RequestsService, 
+    private router:Router,
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
   }
@@ -32,6 +37,10 @@ export class NewpostComponent implements OnInit {
     this.newTitle= "";
     this.newAuthor= "";
     this.router.navigateByUrl('');
+  }
+
+  goBack(){
+    this.location.back();
   }
 
 }
