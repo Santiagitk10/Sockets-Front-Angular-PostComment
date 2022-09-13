@@ -9,7 +9,6 @@ import { MainComponent } from './components/main/main.component';
 import { PostComponent } from './components/post/post.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { AppRoutingModule } from './app-routing.module';
-import { NewpostComponent } from './components/newpost/newpost.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import { NewpostComponent } from './components/newpost/newpost.component';
     MainComponent,
     PostComponent,
     CommentComponent,
-    NewpostComponent
   ],
   imports: [
     BrowserModule,

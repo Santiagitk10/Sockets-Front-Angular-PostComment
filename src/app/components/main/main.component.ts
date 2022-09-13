@@ -15,8 +15,9 @@ import { PostView } from 'src/app/services/viewModels';
 export class MainComponent implements OnInit, OnDestroy {
 
   socketManager?:WebSocketSubject<PostView>;
-
   posts?:Post[];
+  newTitle:string = ""; 
+  newAuthor:string = "";
 
   constructor(private requests:RequestsService, private socket:SocketService) { }
 
@@ -54,6 +55,19 @@ export class MainComponent implements OnInit, OnDestroy {
 
   closeSocketConnection(){
     this.socketManager?.complete();
+  }
+
+
+  submitPost(){
+    const newCommand: CreatePostCommand = {
+      postID: Math.floor(Math.random() * 100000).toString(),
+      title: this.newTitle,
+      author: this.newAuthor
+    }
+    this.requests.createPost(newCommand).subscribe();
+
+    this.newTitle= "";
+    this.newAuthor= "";
   }
 
 }

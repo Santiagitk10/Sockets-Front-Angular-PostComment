@@ -1,7 +1,11 @@
 
 <h2>Discussion Posts</h2>
 
-<a routerLink="/newpost">New Post</a>
+<label for="title">Title </label>
+<input name="title" id="title" type="text" [(ngModel)]="newTitle" placeholder="Title">
+<label for="author">Author </label>
+<input name="author" id="author" type="text" [(ngModel)]="newAuthor" placeholder="Author">
+<button (click)="submitPost()">Submit</button>
 
 <div *ngIf="posts">
     <div *ngFor="let post of posts">
