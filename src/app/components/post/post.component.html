@@ -1,17 +1,27 @@
 
 <h2>{{ post.title }}</h2>
 
-<label for="newComment">New Comment </label>
-<input name="newComment" id="newComment" type="text" [(ngModel)]="newCommentContent" placeholder="Comment">
-<label for="newCommentAuthor">Author </label>
-<input name="newCommentAuthor" id="newCommentAuthor" type="text" [(ngModel)]="newCommentAuthor" placeholder="Author">
-<button (click)="sendComment()">Send</button>
-<button type="button" (click)="goBack()">go back</button>
+<div class="mb-5">
+    <label for="newComment">New Comment </label>
+    <input name="newComment" id="newComment" type="text" [(ngModel)]="newCommentContent" placeholder="Comment">
+    <label for="newCommentAuthor">Author </label>
+    <input name="newCommentAuthor" id="newCommentAuthor" type="text" [(ngModel)]="newCommentAuthor" placeholder="Author">
+    <div>
+        <button (click)="sendComment()" class="btn btn-outline-secondary">Send</button>
+        <button type="button" (click)="goBack()" class="btn btn-outline-dark">go back</button>
+    </div>
+</div>
+
 
 <div *ngIf="post?.comments">
     <div *ngFor="let comment of post?.comments">
-        <app-comment [comment]="comment"></app-comment>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <app-comment [comment]="comment"></app-comment>
+            </div>
+        </div>
     </div>
 </div>
+
 
 

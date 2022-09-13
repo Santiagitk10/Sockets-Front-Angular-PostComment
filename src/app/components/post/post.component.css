@@ -1,0 +1,23 @@
+input {
+    margin: 10px 10px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: gray;
+    text-decoration:underline;
+}
+
+button {
+    margin: 0 10px;
+}
+
+
+.card {
+   color: white;
+   width: 600px;
+   margin: auto;
+   background-color: gray;
+   margin-bottom: 5px;
+}
+

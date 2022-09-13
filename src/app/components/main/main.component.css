@@ -1,0 +1,31 @@
+
+
+input {
+    margin: 0 10px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: gray;
+    text-decoration:underline;
+}
+
+.card {
+    color: white;
+   width: 600px;
+   margin: auto;
+   background-color: gray;
+   margin-bottom: 5px;
+}
+
+p {
+    color: orange;
+}
+
+span {
+    font-weight: 600;
+}
+
+a {
+    color: white;
+}
