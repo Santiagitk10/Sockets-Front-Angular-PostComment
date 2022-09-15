@@ -17,22 +17,43 @@ export class RequestsService {
   };
 
 
-
   bringAllPosts(): Observable<Post[]>{
-    return this.httpClient.get<Post[]>("http://localhost:8081/bringallposts");
+    return this.httpClient.get<Post[]>("https://beta-sofka.herokuapp.com/bringallposts");
   }
+
+  // bringAllPosts(): Observable<Post[]>{
+  //   return this.httpClient.get<Post[]>("http://localhost:8081/bringallposts");
+  // }
 
   bringPostById(postId: string | null):Observable<Post>{
-    return this.httpClient.get<Post>( `http://localhost:8081/bringpost/${postId}`);
+    return this.httpClient.get<Post>( `https://beta-sofka.herokuapp.com/bringpost/${postId}`);
   }
+
+  // bringPostById(postId: string | null):Observable<Post>{
+  //   return this.httpClient.get<Post>( `http://localhost:8081/bringpost/${postId}`);
+  // }
+
+
+
 
   createPost(command:CreatePostCommand): Observable<Object>{
-    return this.httpClient.post("http://localhost:8080/create/post", command, this.httpOptions);
+    return this.httpClient.post("https://alpha-sofka.herokuapp.com/create/post", command, this.httpOptions);
   }
 
+  // createPost(command:CreatePostCommand): Observable<Object>{
+  //   return this.httpClient.post("http://localhost:8080/create/post", command, this.httpOptions);
+  // }
+
+ 
+
   createComment(command:CreateCommentCommand): Observable<Object>{
-    return this.httpClient.post("http://localhost:8080/add/comment", command, this.httpOptions);
+    return this.httpClient.post("https://alpha-sofka.herokuapp.com/add/comment", command, this.httpOptions);
   }
+
+   // createComment(command:CreateCommentCommand): Observable<Object>{
+  //   return this.httpClient.post("http://localhost:8080/add/comment", command, this.httpOptions);
+  // }
+
 
 
 }
