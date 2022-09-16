@@ -4,9 +4,10 @@ import { WebSocketSubject } from 'rxjs/webSocket';
 import { CommentView, PostView } from 'src/app/services/viewModels';
 import { SocketService } from 'src/app/services/socket.service';
 import { RequestsService } from 'src/app/services/requests.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CreateCommentCommand } from 'src/app/services/models';
+import { StateService } from 'src/app/services/state.service';
 
 
 @Component({
@@ -21,16 +22,41 @@ export class PostComponent implements OnInit {
   newCommentContent:string = '';
   newCommentAuthor:string = '';
 
+  lastState:any;
+  isFormReady:boolean = true;
+  hasToken:boolean = true;
+
   constructor(
     private requests:RequestsService,
     private socket:SocketService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private state:StateService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
-    this.startSearch();
+    if(this.validateLogin()){
+      this.startSearch();
+    }
+    
   }
+
+
+  validateLogin():boolean{
+    let isValid = false;
+    this.state.state.subscribe(currentState => {
+      this.lastState = currentState;
+      if(!currentState.logedIn){
+        // this.router.navigateByUrl('') //PENDING TO SEE IF IT isValid MUST BE ASSIGNED AGAIN TO FALSE
+        return;
+      }
+      isValid = true;
+    })
+    return isValid;
+  }
+
+
 
   ngOnDestroy(): void {
     this.closeSocketConnection();
@@ -64,6 +90,23 @@ export class PostComponent implements OnInit {
   }
 
   sendComment(){
+
+    let token = this.state.state.getValue().token;
+
+    if(this.newCommentAuthor === "" || this.newCommentContent === ""){
+      this.isFormReady = false;
+      this.newCommentContent = "";
+      this.newCommentAuthor = "";
+      return;
+    }
+
+    if(!token){
+      this.hasToken = false;
+      this.newCommentContent = "";
+      this.newCommentAuthor = "";
+      return;
+    }
+
     const newCommand: CreateCommentCommand = {
       postID: this.post.aggregateId,
       commentID: Math.floor(Math.random() * 100000).toString(),
@@ -71,7 +114,7 @@ export class PostComponent implements OnInit {
       content: this.newCommentContent
       
     }
-    this.requests.createComment(newCommand).subscribe();
+    this.requests.createComment(newCommand, this.lastState.token).subscribe();
 
     this.newCommentAuthor= "";
     this.newCommentContent= "";

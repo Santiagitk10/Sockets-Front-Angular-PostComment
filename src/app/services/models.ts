@@ -24,3 +24,7 @@ export type CreateCommentCommand = {
     author: string,
     content: string
 }
+
+export type IToken = {
+    token:string
+}

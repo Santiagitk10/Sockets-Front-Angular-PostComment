@@ -21,3 +21,8 @@ button {
    margin-bottom: 5px;
 }
 
+.notPopulated {
+    color: red;
+    margin-top: 10px;
+}
+

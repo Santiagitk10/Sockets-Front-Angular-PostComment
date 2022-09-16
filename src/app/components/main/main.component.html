@@ -6,7 +6,16 @@
     <input name="title" id="title" type="text" [(ngModel)]="newTitle" placeholder="Title">
     <label for="author">Author </label>
     <input name="author" id="author" type="text" [(ngModel)]="newAuthor" placeholder="Author">
-    <button type="button" (click)="submitPost()" class="btn btn-outline-secondary">Submit</button>
+    <div>
+        <button type="button" (click)="submitPost()" class="btn btn-outline-secondary">Submit</button>
+    </div>
+    
+    <div *ngIf="!isFormReady">
+        <div class="notPopulated">All fields must be populated</div>
+    </div>
+    <div *ngIf="!hasToken">
+        <div class="notPopulated">The user must be registered to be able to post</div>
+    </div>
 </div>
 
 

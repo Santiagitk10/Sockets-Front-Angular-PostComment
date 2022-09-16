@@ -29,3 +29,12 @@ span {
 a {
     color: white;
 }
+
+.notPopulated {
+    color: red;
+    margin-top: 10px;
+}
+
+button {
+    margin: 15px 0;
+}
